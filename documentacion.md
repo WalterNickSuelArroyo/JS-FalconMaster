@@ -1127,3 +1127,569 @@ console.log(resultado);
 const entradas = Object.entries(usuario);
 console.log(`El objeto tiene ${entradas.length} propiedades`);
 ```
+
+## 31. Metodos para trabajar con cadenas de texto
+
+```js
+/*
+	📌 Métodos y propiedades para cadenas de texto
+*/
+
+/*
+	📌 .length - Devuelve el numero de caracteres de una cadena de texto 
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.length);
+
+/*
+	📌 .indexOf() .lastIndexOf() - Devuelve el index del primer/último caracter especificado.
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.indexOf('o')); // 1
+// console.log(texto.lastIndexOf('o')); // 16
+
+/*
+	📌 .slice() - Devuelve un fragmento de una cadena de texto.
+	1er parametro - index desde donde queremos cortar
+	2do parametro (opcional) - index hasta donde queremos cortar
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.slice(12, 18)); // Carlos
+
+// La cadena de texto original no es modificada.
+// console.log(texto);
+
+// Si solo establecemos el primer parametro cortara desde esa posición.
+// console.log(texto.slice(8)); // soy Carlos
+
+// Si ponemos un valor negativo indicamos que queremos empezar de derecha a izquierda.
+//console.log(texto.slice(-7, -1)); // Carlos
+
+/*
+	📌 .replace() - Devuelve una cadena de texto en donde remplaza un valor por otro.
+	1er parametro - el texto que queremos remplazar
+	2do parametro - el texto que queremos poner
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.replace('Carlos', 'Arturo')); // Hola yo soy Arturo!
+
+/*
+	📌 .split() - Convierte una cadena de texto en un arreglo.
+	Tenemos que especificar donde cortar cada elemento.
+
+	1er parametro - el caracter que funcionara como separador.
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.split(' '));
+
+/*
+	📌 .toUpperCase() .toLowerCase()
+	Devuelve una cadena de texto de puras minisculas/mayusculas.
+*/
+// const texto = 'Hola yo soy Carlos!';
+// console.log(texto.toUpperCase());
+// console.log(texto.toLowerCase());
+
+/*
+	📌 Métodos para eliminar espaciados:
+	.trim() - Devuelve una cadena de texto (String)	
+	que elimina los espacios en blanco al inicio y final de una cadena de texto.
+
+	.trimStart() - Igual que .trim() pero solo elimina espacios del inicio.
+	.trimEnd() - Igual que .trim() pero solo elimina espacios del final.
+*/
+const texto = '   Hola yo soy Carlos!   ';
+console.log(texto);
+
+console.log(texto.trim());
+console.log(texto.trimStart());
+console.log(texto.trimEnd());
+```
+
+## 32. Metodos para trabajar con numeros
+
+```js
+/*
+	Métodos más importantes para trabajar con numeros
+*/
+
+/*
+	📌 .toString()
+*/
+// const numero = 10;
+// console.log(numero, typeof numero);
+// const texto = numero.toString();
+// console.log(numero, typeof texto);
+
+/*
+	📌 .toFixed()
+	Permite obtener un numero con la cantidad de decimales especificados
+*/
+// const numero = 3.1415;
+// console.log(numero.toFixed()); // 3
+// console.log(numero.toFixed(1)); // 3.1
+// console.log(numero.toFixed(10)); // 3.1415000000
+
+/*
+	📌 .parseInt()
+	Intenta transformar un valor a un entero.
+*/
+// Muy útil para transformar de una cadena de texto a numero.
+// Por ejemplo al trabajar con formularios.
+
+// Ejemplo donde en vez de sumar los numeros, los concatena por ser cadenas de texto
+// const numero1 = prompt('Escribe un numero');
+// const numero2 = prompt('Escribe otro numero');
+// console.log(numero1 + numero2);
+
+// Solución:
+// const numero1 = parseInt(prompt('Escribe un numero'));
+// const numero2 = parseInt(prompt('Escribe otro numero'));
+// console.log(numero1 + numero2);
+// Nota: no podemos sumar decimales!
+
+/*
+	📌 .parseFloat()
+	Intenta transformar un valor a un numero con decimales.
+*/
+// Ejemplo anterior pero permitiendo sumar decimales.
+// const numero1 = parseFloat(prompt('Escribe un numero con decimales'));
+// const numero2 = parseFloat(prompt('Escribe otro numero con decimales'));
+// console.log(numero1 + numero2);
+
+/*
+	📌 Math.random()
+	Genera un numero al azar entre 0 y 1
+*/
+// const numero = Math.random();
+// console.log(numero);
+
+/*
+	📌 Math.floor()
+	Redondea hacia abajo un numero.
+*/
+// console.log(Math.floor(10.1)); // 10
+// console.log(Math.floor(10.99)); // 10
+
+/*
+	📌 Math.floor()
+	Redondea hacia arriba un numero.
+*/
+// console.log(Math.ceil(10.1)); // 11
+// console.log(Math.ceil(10.99)); // 11
+
+/*
+	📌 Math.round()
+	Redondea hacia el entero mas cercano
+*/
+// console.log(Math.round(10.1)); // 10
+// console.log(Math.round(10.99)); // 11
+
+/*
+	📌 Ejemplo de numero al azar de 0 a 100
+*/
+// Obtenemos un numero de 0 a 1 y lo multiplicamos por 101
+
+// const numero = Math.random();
+// console.log(numero); // Numero al azar
+
+// // Redondeamos hacia abajo el numero.
+// console.log(Math.floor(numero * 101));
+```
+
+## 33. Operador spread, rest y destructuracion
+
+```js
+/*
+	📌 Operador Spread
+	Permite tomar los elementos de un arreglo u objeto y expandirlos en otro sitio.
+*/
+const frutas = ['Manzana', 'Pera', 'Piña', 'Melon'];
+const comidaFavorita = ['Pizza', 'Sushi', ...frutas];
+console.log(comidaFavorita);
+
+// Tambien funciona con objetos
+const datosLogin = {
+	nombre: 'Arturo',
+	correo: 'correo@correo.com',
+	password: '123',
+};
+
+const usuario = {
+	nombre: 'Carlos',
+	...datosLogin,
+	edad: 27,
+};
+
+console.log(usuario);
+
+/*
+	📌 Parametro Rest
+	Permite que una funcion contenga un numero indefinido de argumentos.
+	Los argumentos extra que encuentre los convertira en un arreglo.
+*/
+const registrarUsuario = (nombre, correo, ...datosAdicionales) => {
+	console.log(nombre, correo, datosAdicionales);
+};
+
+registrarUsuario('Carlos', 'correo@correo.com');
+registrarUsuario('Alejandro', 'alejandro@correo.com', 28, 'España');
+
+/*
+	📌 Destructuración de objetos
+	Nos permite obtener elementos o propiedades de un arreglo u objeto y guardarlos en una variable.
+*/
+const amigos = ['Alejandro', 'Cesar', 'Manuel'];
+const [primerAmigo, segundoAmigo, tercerAmigo] = amigos;
+
+// Sin destructuración:
+// const primerAmigo = amigos[0];
+// const segundoAmigo = amigos[1];
+
+console.log(primerAmigo);
+
+// Ejemplo con objetos
+const persona = {
+	nombre: 'Carlos',
+	edad: 27,
+	pais: 'México',
+};
+const { nombre, pais } = persona;
+console.log(nombre, pais);
+
+// Podemos destructurar los valores de una funcion
+const mostrarEdad = ({ nombre, edad }) => {
+	console.log(`${nombre} tiene ${edad} años`);
+};
+mostrarEdad(persona);
+```
+
+## 34. Ciclo for
+
+```js
+/* 
+	📌 Ciclos
+	Los ciclos son estructuras que nos van a permitir repetir 
+	un bloque de código cuantas veces necesitemos.
+*/
+const nombres = ['Carlos', 'Christian', 'Christoher', 'Estefania', 'Erika', 'Manuel'];
+// console.log(`Hola ${nombres[0]}`);
+// console.log(`Hola ${nombres[1]}`);
+// console.log(`Hola ${nombres[2]}`);
+// Ahora imaginemos que tenemos 100 nombres, o 1000.
+
+/* 
+	📌 Ciclo For
+	Repite un bloque de código mientras se cumpla una condición.
+
+	Expresión 1: Se ejecuta una sola vez antes de comenzar a repetir el bloque de código.
+	Expresión 2: Una condicion, mientras se cumpla se ejecutara el bloque de código.
+	Expresión 3: Esta expresion se ejecuta siempre y despues de que se ejecute el bloque de código.
+*/
+
+// for(expresion1 ; expresion2 ; expresion3){
+//     Bloque de código a repetir
+// }
+
+/* 
+	📌 Ejemplo de bloque sencillo donde contamos del 1 al 10
+*/
+for (let numero = 1; numero < 11; numero++) {
+	// console.log(numero);
+}
+
+/* 
+	📌 Contar del 1 al 100 con incrementos de 5
+*/
+for (let numero = 5; numero <= 100; numero = numero + 5) {
+	// console.log(numero);
+}
+
+/* 
+	📌 Contar del 50 al 1
+*/
+for (let numero = 50; numero > 0; numero--) {
+	console.log(numero);
+}
+
+/* 
+	📌 Recorrer un arreglo con el ciclo for
+*/
+for (let i = 0; i < nombres.length; i++) {
+	console.log(nombres[i]);
+}
+```
+
+## 35. Break y continue
+
+```js
+/* 
+	📌 Break
+	La sentencia break nos sirve para salir de bloques de tipo Switch.
+	Pero tambien nos sirve para forzar la salida de un ciclo.
+*/
+
+// Lista de nombres que empieza por la A
+const nombres = ['Arturo', 'Andres', 'Alejandro', 'Roberto', 'Adrian', 'Antonio', 'Angel'];
+
+// Comprobamos que todos los nombres empiecen por A
+for (let i = 1; i < nombres.length; i++) {
+	// console.log(nombres[i][0]); // Accedemos a la primera letra de cada nombre.
+	// console.log();
+
+	// Detectamos si alguna letra es diferente a A
+	if (nombres[i][0] !== 'A') {
+		// Cortamos la ejecución del ciclo
+		console.log('ALTO! Hay un nombre que no empieza por la letra A');
+		// console.log(nombres[i] + ' no empieza por la letra A');
+		break;
+	}
+
+	console.log(nombres[i]);
+}
+
+/* 
+	📌 Continue
+	La sentencia continue nos sirve para saltar a la siguiente iteración.
+*/
+
+const invitados = ['Carlos', 'Christian', 'Christoher', 'Jorge', 'Estefania', 'Erika', 'Manuel'];
+// Recorremos el arreglo de invitados
+console.log('Lista de personas aceptadas:');
+for (let i = 0; i < invitados.length; i++) {
+	// Detectamos si hay algun invitado que no queremos
+	if (invitados[i] === 'Jorge') {
+		continue;
+	}
+
+	console.log(invitados[i]);
+}
+```
+
+## 36. Ciclo while
+
+```js
+/*
+	📌 Ciclo While
+	Es similar a for, pero con la diferencia de que solo tenemos un condicional.
+	Mientras se cumpla el condicional se ejecutara el ciclo.
+*/
+
+// Ciclo infinito! Cuidado!
+// while (true) {
+// 	console.log('Hola');
+// }
+
+let contador = 0;
+while (contador <= 10) {
+	// console.log(contador);
+	contador++;
+}
+
+/*
+	📌 Ciclo Do While
+	Es similar al ciclo while, con la diferencia de que ejecuta el bloque de código al menos una vez.
+*/
+let i = 0;
+do {
+	console.log(i);
+	i++; // Cuidado porque si no ponemos el incremento tendremos un loop infinito.
+} while (i <= 10);
+```
+
+## 37. Ciclo foreach, for in y for of
+
+```js
+/*
+	📌 Ciclo forEach
+	Es un metodo de los arreglos que podemos usar para recorrer los elementos.
+*/
+const amigos = ['Alejandro', 'Cesar', 'Manuel'];
+amigos.forEach((amigo, index) => console.log(`El amigo #${index} es: ${amigo}`));
+
+/*
+	📌 Ciclo for in
+	Nos permite recorrer las propiedades de un objeto.
+*/
+const persona = {
+	nombre: 'Carlos',
+	edad: 27,
+	correo: 'correo@correo.com',
+};
+
+for (propiedad in persona) {
+	console.log(propiedad);
+
+	// Ejemplo para borrar los valores de todas las propiedades.
+	persona[propiedad] = '';
+}
+console.log(persona);
+
+/*
+	📌 Ciclo for of
+	Nos permite recorrer los valores de un objeto iterable.
+	Podemos recorrer: Arreglos, Cadenas de Texto, Mapas y Listas de Nodos, etc
+*/
+// Obtenemos una colección HTML de las etiquetas.
+const etiquetas = document.head.children;
+
+// Las mostramos en pantalla.
+for (elemento of etiquetas) {
+	// console.log(elemento);
+}
+
+// Esto no funciona, porque etiquetas no tiene el metodo forEach.
+// etiquetas.forEach((e) => console.log(e));
+
+// Un truco para seguir usando forEach y no for of es transformar la colección a un arreglo
+[...etiquetas].forEach((e) => console.log(e));
+```
+
+## 38. Clases
+
+```js
+/*
+	📌 Clases
+	Las clases son plantillas que podemos usar para crear objetos.
+	Sirven para encapsular código.
+*/
+
+/*
+	📌 Estructura de una clase:
+	- Definición
+	- Propiedades: La clase puede contener variables. Dentro de una clase se llaman propiedades.
+	- Constructor: Es un metodo especial para inicializar un objeto creado a partir de una clase.
+	- Métodos: La clase puede contener funciones. Dentro de una clase se llaman metodos.
+*/
+// class NombreDeLaClase {
+// 	constructor() {
+// 		//... Código del constructor
+// 	}
+// }
+
+class Usuario {
+	/* Propiedades
+		Son variables dentro de la clase.
+		Sirven para guardar informacion relacionada y que la clase pueda utilizarla.
+	*/
+	tipo = 'usuario';
+
+	/*  📌 Metodo constructor
+		Se ejecuta automaticamente cada vez que hacemos un nuevo objeto con la clase.
+		Se usa para inicializar las propiedades.
+		En este caso toma el nombre y apellido y establece los valores en las propiedades.
+	*/
+	constructor(nombre, apellido) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+
+		console.log('Nuevo usuario registrado!');
+	}
+
+	// Metodos
+	obtenerNombreCompleto() {
+		console.log('Obteniendo datos...');
+		return `${this.nombre} ${this.apellido}`;
+	}
+}
+
+// Con la clase podemos crear objetos:
+const usuario = new Usuario('Carlos Arturo', 'Esparza');
+
+// Podemos crear varios objetos, uno por usuario:
+const usuario2 = new Usuario('Manuel', 'Garcia');
+
+// Accedemos a las propiedades
+console.log(usuario.tipo);
+console.log(usuario.apellido);
+
+// Accedemos a los metodos
+console.log(usuario.obtenerNombreCompleto());
+```
+
+## 39. Herencia
+
+```js
+/*
+	📌 Herencia
+	La herencia nos permite crear clases tomando las propiedades y metodos de otras clases.
+*/
+
+class Usuario {
+	constructor(usuario, password) {
+		this.usuario = usuario;
+		this.password = password;
+	}
+
+	obtenerPosts() {
+		const posts = ['post1', 'post2'];
+		return posts;
+	}
+}
+
+class Moderador extends Usuario {
+	constructor(usuario, password, permisos) {
+		// Super nos permite copair todos los metodos y propiedades de la clase original.
+		// Incluyendo el constructor, por eso le pasamos los parametros usuario y password.
+		super(usuario, password);
+		this.permisos = permisos;
+	}
+
+	borrarPost(id) {
+		if (this.permisos.includes('borrar')) {
+			console.log(`El post con el ${id} ha sido borrado`);
+		} else {
+			console.log('No tienes los suficientes permisos para borrar posts');
+		}
+	}
+}
+
+const usuario1 = new Usuario('carlos', '123');
+console.log(usuario1.permisos);
+console.log(usuario1.obtenerPosts());
+
+// El usuario 2 es un moderador
+const usuario2 = new Moderador('arturo', '123', ['borrar', 'editar']);
+// Tambien puede acceder a los metodos y propiedades de la clase Usuario.
+console.log(usuario2.tipo);
+console.log(usuario2.obtenerPosts());
+usuario2.borrarPost(1);
+```
+
+## 40. Metodos y propiedades estaticos
+
+```js
+/*
+	📌 Propiedades y Métodos Estaticos
+	Para poder acceder a las propiedades y metodos de una clase, 
+	primero tenemos que crear un nuevo objeto apartir de una clase.
+
+	Esto lo podemos cambiar utilizando propiedades y métodos estaticos.
+*/
+class Usuario {
+	constructor(nombre, correo) {
+		this.nombre = nombre;
+		this.correo = correo;
+
+		console.log('Se ha creado un usuario en la base de datos');
+	}
+
+	static borrar(id_usuario) {
+		console.log(`El usuario con el id: ${id_usuario} ha sido borrado de la base de datos`);
+
+		/* Si usamos metodos estaticos, no vamos a poder acceder al nombre y correo, 
+		porque para eso necesitabamos el constructor */
+		// console.log(this.nombre);
+	}
+
+	// Tambien funciona con propiedades
+	static registrados = 1000;
+}
+
+// Para poder borrar al usuario teniamos que crear un objeto primero:
+// const usuario = new Usuario('carlos', 'correo@correo.com');
+
+// Si tenemos una propiedad o metodo estatico podemos acceder sin crear el objeto.
+Usuario.borrar(1);
+console.log(Usuario.registrados);
+```
