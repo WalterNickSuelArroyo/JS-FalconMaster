@@ -261,9 +261,11 @@ hola();
 
 // Null
 // Normalmente lo usamos cuando queremos especificar que un valor sea nulo.
+// const miVariable = null;
 
 //Undefined
 //Undefined se usa para indicarnos que un valor no esta definido
+// const miVariable2 = undefined;
 ```
 
 ## 11. Operadores aritmeticos y de comparacion
@@ -635,10 +637,10 @@ switch (usuario.pais) {
 
 // Ejemplo con operador ternario
 const boleto = 'vip';
-const codigoDeAcceso = boleto === 'VIP' ? 'VIP-123-456-789' : 'Regular-123-456-789';
+const codigoDeAcceso = boleto === 'vip' ? 'VIP-123-456' : 'Regular-456-789';
 
 // Ejemplo 2 - No siempre es necesario guardar el valor en una variable
-boleto === 'VIP' ? console.log('Tu boleto es VIP-123-456-789') : console.log('Tu boleto es Regular-123-456-789');
+boleto === 'vip' ? console.log('Tu boleto es VIP-123-456') : console.log('Tu boleto es Regular-456-789');
 ```
 
 ## 19. Funciones
@@ -1272,7 +1274,7 @@ console.log(texto.trimEnd());
 // console.log(Math.floor(10.99)); // 10
 
 /*
-	📌 Math.floor()
+	📌 Math.ceil()
 	Redondea hacia arriba un numero.
 */
 // console.log(Math.ceil(10.1)); // 11
@@ -1692,4 +1694,162 @@ class Usuario {
 // Si tenemos una propiedad o metodo estatico podemos acceder sin crear el objeto.
 Usuario.borrar(1);
 console.log(Usuario.registrados);
+```
+
+## 41. Callbacks
+
+```js
+/*Los callbacks son funciones que se pasan como argumentos a otras funciones y se ejecutan despues de que se complete una operacion asincrónica o algún otro tipo de evento. Esto es fundamental porque permite que ciertas operaciones se ejecuten una vez que otras operaciones mas lentas se completen, sin bloquear el hilo principal de ejecucion.
+
+La asincronia se refiere a la capacidad de ejecutar multiples tareas independientes en paralelo o en un orden no predefinido. En terminos simples, es la capacidad de realizar operaciones sin tener que esperar a que una operacion anterior termine antes de comenzar la siguiente.
+
+El setTimeout es una función en JavaScript que se utiliza para ejecutar una función o evaluar una expresión después de que haya transcurrido un tiempo especificado, medido en milisegundos. Es una manera de introducir una pausa o retraso en la ejecución de cierto código, lo que es útil para simular operaciones asincrónicas, animaciones, o para manejar situaciones donde se necesita un retardo antes de realizar alguna acción.
+
+setTimeout(función, tiempo_en_milisegundos);
+
+función: Es la función que se ejecutará después de que transcurra el tiempo especificado.
+tiempo_en_milisegundos: Es el tiempo en milisegundos que debe pasar antes de que se ejecute la función.
+
+*/
+
+// EJEMPLO 1
+
+const obtenerPostDeUsuario = (usuario, callback) => {
+    console.log(`Obteniendo los post de ${usuario} ...`);
+
+    setTimeout(() => {
+        let posts = ['Post1', 'Post2', 'Post3'];
+        callback(posts);
+    }, 2000);
+};
+
+obtenerPostDeUsuario('carlos', (posts) => {
+    console.log(posts);
+});
+
+// EJEMPLO 2
+
+function getUserData(userId, callback) {
+    // Simulando una llamada asincronica
+    setTimeout(() => {
+        const user = {
+            id: userId,
+            name: 'John Doe',
+            email: 'john.doe@example.com'
+        };
+        callback(user);
+    }, 1000) // Simular un retardo de 1 segundo
+}
+
+// Llamamos a la funcion getUserData pasando un callback
+getUserData(123, function(user) {
+    console.log('Datos del usuario: ', user);
+});
+```
+
+## 42. Promesas
+
+```js
+/* 
+Las promesas en JavaScript son una forma de manejar operaciones que tardan en completarse, como solicitudes de datos o temporizadores. Imagina que pides una pizza; el pizzero te promete que llegará en 30 minutos. Durante esos 30 minutos, puedes hacer otras cosas en lugar de quedarte esperando por la puerta. La promesa en JavaScript funciona de manera similar: te permite continuar ejecutando otras tareas mientras espera que algo (como la carga de datos) se complete.
+
+let promesaDePizza = new Promise(function(resolve, reject) {
+    let pizzaEstaLista = true; // Cambia esto a false para ver cómo manejar errores
+
+    if (pizzaEstaLista) {
+        resolve("¡Tu pizza está lista!");
+    } else {
+        reject("Ocurrió un problema, la pizza se quemó.");
+    }
+});
+
+promesaDePizza.then(function(resultado) {
+    console.log(resultado); // Se ejecuta si todo sale bien
+}).catch(function(error) {
+    console.log(error); // Se ejecuta si hay un error
+});
+
+- Promise es un objeto que representa la eventual finalización o fracaso de una operación asíncrona.
+- resolve se llama si la operación fue exitosa (en este caso, la pizza está lista).
+- reject se llama si algo sale mal (por ejemplo, la pizza se quemó).
+- then es un método que se ejecuta cuando la promesa se cumple exitosamente.
+- catch es un método que maneja el caso cuando la promesa falla.
+
+
+*/
+const promesa = new Promise((resolve, reject) => {
+    // Accion que se ejecutará
+    setTimeout(() => {
+        const exito = true;
+        if (exito) {
+            resolve('La operacion tuvo exito');
+        } else {
+            reject('La operacion no tuvo exito');
+        }
+    }, 4000)
+});
+
+promesa.then((mensaje) => {
+    alert(mensaje);
+})
+
+promesa.catch((mensaje) => {
+    alert(mensaje);
+})
+```
+
+## 43. Ejemplo de promesa
+
+```js
+const fetchPost = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const posts = ['Post 1', 'Post 2', 'Post 3'];
+            const error = true;
+
+            if (error) {
+                reject('Hubo un error al intentar obtener los posts');
+            } else {
+                resolve(posts);
+            }
+        }, 2000);
+    });
+};
+
+fetchPost()
+    .then((posts) => {
+        console.log(posts);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+```
+
+## 44. Async/Await y Try/Catch
+
+```js
+const fetchPost = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const posts = ['Post 1', 'Post 2', 'Post 3'];
+            const error = false;
+
+            if (error) {
+                reject('Hubo un error al intentar obtener los posts');
+            } else {
+                resolve(posts);
+            }
+        }, 2000);
+    });
+};
+
+const mostrarPosts = async() => {
+    try {
+        const posts = await fetchPost();
+        console.log(posts);
+    } catch (error) {
+        console.log(error);
+    }
+};
+mostrarPosts();
 ```
