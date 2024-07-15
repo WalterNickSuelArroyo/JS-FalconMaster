@@ -5,6 +5,7 @@
 	- Trabajar con la barra de direcciones
 	- Mostrar alertas
 	- etc
+	BOM (Browser Object Model): El BOM es una colección de objetos proporcionados por el navegador para interactuar con elementos fuera del contenido web, como la ventana del navegador, los cuadros de diálogo, y la barra de navegación. Incluye objetos como window, navigator, screen, history, location, entre otros. Estos objetos permiten controlar y manipular aspectos del navegador y de la ventana del navegador misma.
 */
 
 /*
